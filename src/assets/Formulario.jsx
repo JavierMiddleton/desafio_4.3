@@ -15,6 +15,7 @@ const Formulario = ({ errorAlert, successAlert, listHandle }) => {
   useEffect(() => {
     listHandle(userList);
   }, [userList]);
+
   // Validate Input function
   const validateInput = (e) => {
     e.preventDefault();
