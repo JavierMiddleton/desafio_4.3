@@ -9,8 +9,7 @@ import { BaseColaboradores } from "./assets/BaseColaboradores";
 function App() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [colaboradores, setColaboradores] = useState(BaseColaboradores); // Cambia 'list' a 'colaboradores'
-
+  const [colaboradores, setColaboradores] = useState(BaseColaboradores);
   const handleListUpdate = (newList) => {
     setColaboradores(newList);
   };
