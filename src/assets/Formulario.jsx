@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BaseColaboradores } from "./BaseColaboradores";
 import { v4 as uuidv4 } from "uuid";
 
-const Formulario = ({ errorAlert, successAlert }) => {
+const Formulario = ({ errorAlert, successAlert, listHandle }) => {
   //useState consts
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,9 +11,14 @@ const Formulario = ({ errorAlert, successAlert }) => {
   const [phone, setPhone] = useState("");
   const [userList, setUserList] = useState(BaseColaboradores);
 
+  // Función de Efecto que mire los cambios en userList. Así se agrega el colaborador con solo un click en submit
+  useEffect(() => {
+    listHandle(userList);
+  }, [userList]);
   // Validate Input function
   const validateInput = (e) => {
     e.preventDefault();
+
     //Validation if
     if (
       name === "" ||
@@ -27,8 +32,8 @@ const Formulario = ({ errorAlert, successAlert }) => {
     } else {
       successAlert("¡Logrado!");
       errorAlert("");
-      setUserList([
-        ...userList,
+      setUserList((prevUserList) => [
+        ...prevUserList,
         {
           id: uuidv4(),
           nombre: name,
