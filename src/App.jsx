@@ -19,9 +19,14 @@ function App() {
   };
 
   const handleSearch = (searchTerm) => {
-    const filtered = colaboradores.filter((colaborador) =>
-      colaborador.nombre.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filtered = colaboradores.filter((colaborador) => {
+      // Comprueba si el término de búsqueda se encuentra en cualquier campo del colaborador
+      const searchTermLower = searchTerm.toLowerCase();
+      return Object.values(colaborador).some((field) =>
+        field.toLowerCase().includes(searchTermLower)
+      );
+    });
+
     setFilteredColaboradores(filtered);
   };
 
