@@ -1,17 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Alert from "./assets/Alert";
 import Formulario from "./assets/Formulario";
 import React from "react";
 import "./App.css";
 import Listado from "./assets/Listado";
 import { BaseColaboradores } from "./assets/BaseColaboradores";
+import Buscador from "./assets/Buscador";
 
 function App() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [colaboradores, setColaboradores] = useState(BaseColaboradores);
+  const [filteredColaboradores, setFilteredColaboradores] = useState([]);
+
   const handleListUpdate = (newList) => {
     setColaboradores(newList);
+    setFilteredColaboradores(newList);
+  };
+
+  const handleSearch = (searchTerm) => {
+    const filtered = colaboradores.filter((colaborador) =>
+      colaborador.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredColaboradores(filtered);
   };
 
   return (
@@ -19,7 +30,8 @@ function App() {
       <div className="main-container">
         <div className="list-h1-container">
           <h1>Lista de colaboradores</h1>
-          <Listado colaboradores={colaboradores} />
+          <Buscador onSearch={handleSearch} />
+          <Listado colaboradores={filteredColaboradores} />
         </div>
         <div className="form-alert-container">
           <Formulario
