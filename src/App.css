@@ -9,9 +9,9 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  border: 0.5px solid rgb(179, 168, 168);
+  border: 0.5px solid rgb(163, 162, 162);
   padding: 30px;
-  border-radius: 2%;
+  border-radius: 15px;
 }
 
 .form-container h2{
